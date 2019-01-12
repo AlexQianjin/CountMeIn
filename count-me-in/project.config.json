@@ -10,7 +10,7 @@
 	},
 	"appid": "wx43a52ee9fb7b4b9b",
 	"projectname": "count-me-in",
-	"libVersion": "2.2.5",
+	"libVersion": "2.5.0",
 	"condition": {
 		"search": {
 			"current": -1,
