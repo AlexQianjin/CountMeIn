@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "van-row": "../../vant/row/index",
+    "van-col": "../../vant/col/index",
+    "van-panel": "../../vant/panel/index",
+    "van-button": "../../vant/button/index"
+  }
 }

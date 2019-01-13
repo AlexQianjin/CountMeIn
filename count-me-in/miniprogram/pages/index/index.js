@@ -7,7 +7,8 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    courses: []
   },
 
   onLoad: function() {
@@ -18,27 +19,56 @@ Page({
       return
     }
 
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              console.log('getSetting');
-              console.log(res.userInfo);
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
-            }
-          })
-        } else {
-          console.log('need to get user info');
-          this.onGetOpenid();
-        }
+    const db = wx.cloud.database();
+    const _ = db.command
+    let date = new Date();
+    db.collection('courses').where(_.and([
+      {
+        year: date.getFullYear()
+      },
+      {
+        month: date.getMonth() + 1
+      },
+      {
+        "week.dayIndex": (date.getDay() + 6) % 7
       }
-    })
+  ])).get({
+      success: res => {
+        this.setData({
+          courses: res.data
+        })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    });
+
+    // // 获取用户信息
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           console.log('getSetting');
+    //           console.log(res.userInfo);
+    //           this.setData({
+    //             avatarUrl: res.userInfo.avatarUrl,
+    //             userInfo: res.userInfo
+    //           })
+    //         }
+    //       })
+    //     } else {
+    //       console.log('need to get user info');
+    //       this.onGetOpenid();
+    //     }
+    //   }
+    // })
   },
 
   onGetUserInfo: function(e) {

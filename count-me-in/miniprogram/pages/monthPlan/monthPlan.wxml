@@ -1,0 +1,14 @@
+<van-row wx:for="{{courses}}" 
+            wx:key="{{index}}">
+  <van-col span="24">
+    <van-tag type="primary">{{item.year}}年{{item.month}}月 {{item.week.dayofweek}} </van-tag>
+    <van-cell-group wx:for="{{item.week.courses}}" wx:for-index="idx" wx:for-item="itemCourse"
+            wx:key="{{idx}}">
+        <van-cell
+            title="{{itemCourse.name}}"
+            value="{{itemCourse.coach}}"
+            label="{{itemCourse.time}} {{itemCourse.location}}"
+        />
+    </van-cell-group>
+  </van-col>
+</van-row>
