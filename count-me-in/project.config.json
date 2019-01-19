@@ -28,7 +28,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -39,7 +39,13 @@
 				{
 					"id": -1,
 					"name": "monthPlan",
-					"pathName": "pages/monthPlan/monthPlan"
+					"pathName": "pages/monthPlan/monthPlan",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "userConsole",
+					"pathName": "pages/userConsole/userConsole"
 				}
 			]
 		}

@@ -1,12 +1,34 @@
 //index.js
-const app = getApp()
+const app = getApp();
+const localMemberInfoKey = 'localMemberInfo';
+
+function daysBetween(date1, date2) {
+
+  // The number of milliseconds in one day
+  var ONE_DAY = 1000 * 60 * 60 * 24;
+
+  // Convert both dates to milliseconds
+  var date1_ms = date1.getTime();
+  var date2_ms = date2.getTime();
+
+  // Calculate the difference in milliseconds
+  var difference_ms = Math.abs(date1_ms - date2_ms);
+
+  // Convert back to days and return
+  return Math.round(difference_ms / ONE_DAY);
+
+}
 
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
     userInfo: {},
+    memberInfo: {},
+    hasValidated: false,
     logged: false,
     takeSession: false,
+    cellphone: '',
+    errorMessage: '',
     requestResult: ''
   },
 
@@ -28,14 +50,37 @@ Page({
               console.log('getSetting');
               console.log(res.userInfo);
               this.setData({
+                logged: true,
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
             }
           })
+          console.log(this.data.logged);
+          wx.getStorage({
+            key: localMemberInfoKey,
+            success: res => {
+              let data = res.data;
+              let startDate = new Date(data.startDate);
+              let endDate = new Date(startDate.setMonth(startDate.getMonth() + data.month));
+              let today = new Date();
+              data.daysLeft = daysBetween(endDate, today);
+              wx.setStorage({
+                key: localMemberInfoKey,
+                data: data
+              })
+
+              this.setData({
+                memberInfo: data,
+                hasValidated: true,
+                logged: true,
+              });
+            }
+          });
         } else {
           console.log('need to get user info');
           this.onGetOpenid();
+          this.setData({ logged: false});
         }
       }
     })
@@ -52,6 +97,66 @@ Page({
       });
       // this.onAddUser(e.detail.userInfo);
     }
+  },
+
+  onChange(event) {
+    this.setData({
+      cellphone: event.detail,
+      errorMessage: ''
+    });
+  },
+
+  validateMembership: function() {
+    let phone = this.data.cellphone;
+    console.log(phone);
+    if (!phone) {
+      this.setData({ errorMessage: '请输入手机号'});
+      return;
+    }
+    if (!/^\d{11}$/.test(phone)) {
+      this.setData({ errorMessage: '请输入完整手机号' });
+      return;
+    }
+
+    const db = wx.cloud.database();
+    // const _ = db.command 15972217310
+    console.log(phone, 85);
+    db.collection('members').where({
+      cellphone: phone
+    }).get({
+      success: res => {
+        if(res.data.length === 0) {
+          wx.showToast({
+            icon: 'none',
+            title: '无会员信息'
+          })
+          return;
+        }
+        let data = res.data[0];
+        let startDate = new Date(data.startDate);
+        data.start = startDate.toLocaleDateString();
+        let endDate = new Date(startDate.setMonth(startDate.getMonth() + data.month));
+        data.end = endDate.toLocaleDateString();
+        let today = new Date();
+        data.daysLeft = daysBetween(endDate, today);
+        wx.setStorage({
+          key: localMemberInfoKey,
+          data: data
+        })
+        this.setData({
+          memberInfo: data,
+          hasValidated: true
+        })
+        console.log('[数据库] [查询记录] 成功: ', res.data)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    });
   },
 
   onAddUser: function(userInfo) {
@@ -93,7 +198,8 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
+        console.log('[云函数] [login] user openid: ', res.result.openid);
+        console.log(this.data.logged);
         app.globalData.openid = res.result.openid
         wx.navigateTo({
           url: '../userConsole/userConsole',

@@ -2,21 +2,65 @@
 <view class="container">
 
   <!-- 用户 openid -->
-  <view class="userinfo">
+  <view class="userinfo" wx:if="{{logged}}">
     <button 
       open-type="getUserInfo" 
-      bindgetuserinfo="onGetUserInfo"
       class="userinfo-avatar"
       style="background-image: url({{avatarUrl}})"
     ></button>
-    <view>
-      <button class="userinfo-nickname" open-type="getUserInfo">微信登陆</button>
-    </view>
+    
     <!--
     <view>
       <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
     </view>
     -->
   </view>
-
+  
+  <view>
+    <button 
+      wx:if="{{!logged}}"
+      class="userinfo-nickname" 
+      bindgetuserinfo="onGetUserInfo"
+      open-type="getUserInfo"
+    >微信登陆</button>
+  </view>
 </view>
+<van-cell-group wx:if="{{ !hasValidated }}">
+      <van-field
+        value="{{ cellphone }}"
+        required
+        placeholder="请输入会员手机号"
+        error-message="{{ errorMessage }}"
+        border="{{ true }}"
+        bind:change="onChange"
+      />
+      <van-button type="primary" 
+      size="large"
+      bind:click="validateMembership">验证会员</van-button>
+    </van-cell-group>
+<van-cell-group wx:if="{{ hasValidated }}">
+  <van-cell
+    title="姓名"
+    value="{{ memberInfo.name }}"
+  />
+  <van-cell
+    title="手机号"
+    value="{{ memberInfo.cellphone }}"
+  />
+  <van-cell
+    title="所属健身房"
+    value="{{ memberInfo.gymName }}"
+  />
+  <van-cell
+    title="入会日期"
+    value="{{ memberInfo.start }}"
+  />
+  <van-cell
+    title="会员日期"
+    value="{{ memberInfo.end }}"
+  />
+  <van-cell
+    title="剩余会员天数"
+    value="{{ memberInfo.daysLeft }}"
+  />
+</van-cell-group>

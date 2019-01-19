@@ -10,6 +10,14 @@ App({
       })
     }
 
+    let UpdateManager = wx.getUpdateManager();
+
+    UpdateManager.onCheckForUpdate(res => {
+      if (res.hasUpdate) {
+        UpdateManager.applyUpdate();
+      }
+    })
+
     this.globalData = {}
   }
 })
