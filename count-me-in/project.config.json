@@ -28,12 +28,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
+					"id": 0,
+					"name": "index",
+					"pathName": "pages/index/index",
 					"query": ""
 				},
 				{
@@ -45,7 +45,14 @@
 				{
 					"id": -1,
 					"name": "userConsole",
-					"pathName": "pages/userConsole/userConsole"
+					"pathName": "pages/userConsole/userConsole",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": ""
 				}
 			]
 		}

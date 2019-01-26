@@ -1,0 +1,24 @@
+<!--pages/login/login.wxml-->
+<view class="parent">
+<button 
+  class="login-button"
+  bindgetuserinfo="onGetUserInfo"
+  open-type="getUserInfo"
+>微信登陆</button>
+</view>
+<!-- <van-row custom-class="row">
+  <van-col span="24">
+    <van-button type="primary"
+        size="large"
+        bind:getuserinfo="onGetUserInfo"
+        open-type="getUserInfo"
+      >微信登陆</van-button>
+
+  </van-col>
+</van-row> -->
+<!-- <van-button type="primary"
+      size="large"
+      bind:getuserinfo="onGetUserInfo"
+      open-type="getUserInfo"
+    >微信登陆</van-button>
+</view> -->

@@ -1,3 +1,4 @@
+
 //index.js
 const app = getApp();
 const localMemberInfoKey = 'localMemberInfo';
@@ -79,7 +80,10 @@ Page({
           });
         } else {
           console.log('need to get user info');
-          this.onGetOpenid();
+          // this.onGetOpenid();
+          wx.redirectTo({
+            url: '../login/login'
+          })
           this.setData({ logged: false});
         }
       }
@@ -117,15 +121,16 @@ Page({
       this.setData({ errorMessage: '请输入完整手机号' });
       return;
     }
+    this.getMemberInfo(phone);
+  },
 
+  getMemberInfo: function(phone) {
     const db = wx.cloud.database();
-    // const _ = db.command 15972217310
-    console.log(phone, 85);
     db.collection('members').where({
       cellphone: phone
     }).get({
       success: res => {
-        if(res.data.length === 0) {
+        if (res.data.length === 0) {
           wx.showToast({
             icon: 'none',
             title: '无会员信息'
@@ -139,6 +144,7 @@ Page({
         data.end = endDate.toLocaleDateString();
         let today = new Date();
         data.daysLeft = daysBetween(endDate, today);
+        data.createTime = today.toString();
         wx.setStorage({
           key: localMemberInfoKey,
           data: data
@@ -157,39 +163,6 @@ Page({
         console.error('[数据库] [查询记录] 失败：', err)
       }
     });
-  },
-
-  onAddUser: function(userInfo) {
-    const db = wx.cloud.database()
-    db.collection('users').add({
-      data: {
-        avatarUrl: userInfo.avatarUrl,
-        city: userInfo.city,
-        country: userInfo.country,
-        gender: userInfo.gender,
-        language: userInfo.language,
-        nickName: userInfo.nickName,
-        province: userInfo.province
-      },
-      success: res => {
-        // 在返回结果中会包含新创建的记录的 _id
-        this.setData({
-          counterId: res._id,
-          count: 1
-        })
-        wx.showToast({
-          title: '新增记录成功',
-        })
-        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '新增记录失败'
-        })
-        console.error('[数据库] [新增记录] 失败：', err)
-      }
-    })
   },
 
   onGetOpenid: function() {
@@ -214,54 +187,16 @@ Page({
     })
   },
 
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
+  onHide: function() {
+    wx.getStorage({
+      key: localMemberInfoKey,
+      success: res => {
+        let data = res.data;
+        if(data && data.cellphone) {
+          console.log('refresh member info');
+          this.getMemberInfo(data.cellphone);
+        }
       }
-    })
-  },
-
+    });
+  }
 })

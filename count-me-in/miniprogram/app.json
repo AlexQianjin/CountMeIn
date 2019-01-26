@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/monthPlan/monthPlan",
+    "pages/login/login",
+    "pages/chooseLib/chooseLib",
     "pages/userConsole/userConsole"
   ],
   "window": {

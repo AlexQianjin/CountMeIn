@@ -16,14 +16,14 @@
     -->
   </view>
   
-  <view>
+  <!-- <view>
     <button 
       wx:if="{{!logged}}"
       class="userinfo-nickname" 
       bindgetuserinfo="onGetUserInfo"
       open-type="getUserInfo"
     >微信登陆</button>
-  </view>
+  </view> -->
 </view>
 <van-cell-group wx:if="{{ !hasValidated }}">
       <van-field
