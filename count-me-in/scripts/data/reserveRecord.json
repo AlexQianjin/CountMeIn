@@ -1,0 +1,34 @@
+[
+	{
+		"year": 2019,
+		"month": 1,
+		"dayIndex": 0,
+		"dayofweek": "周一",
+		"cellphone": "",
+        "name": "",
+        "valid": false,
+		"course": {
+			"cousreIndex": 0,
+			"time": "19:00 - 19:50",
+			"name": "激情有氧",
+			"coach": "Tracy",
+			"location": "团体课教室"
+		}
+	},
+	{
+		"year": 2019,
+		"month": 1,
+		"dayIndex": 0,
+		"dayofweek": "周一",
+		"cellphone": "",
+        "name": "",
+        "valid": true,
+		"course": {
+			"cousreIndex": 1,
+			"time": "20:00 - 20:50",
+			"name": "尊巴",
+			"coach": "Winne",
+			"location": "团体课教室"
+		}
+	}
+]

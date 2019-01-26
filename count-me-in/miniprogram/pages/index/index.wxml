@@ -1,8 +1,8 @@
 
 <view class="container" wx:if="{{courses.length > 0 ? true : false}}">
-  <text>{{courses[0].year}}年{{courses[0].month}}月 {{courses[0].week.dayofweek}}</text>
+  <text>{{courses[0].year}}年{{courses[0].month}}月 {{courses[0].dayofweek}}</text>
 </view>
-<van-panel wx:for="{{courses[0].week.courses}}" 
+<van-panel wx:for="{{courses[0].courses}}" 
 wx:if="{{courses.length > 0 ? true : false}}"
 wx:key="{{index}}" 
 title="{{item.name}}" 
@@ -11,6 +11,7 @@ status="{{item.coach}}" use-footer-slot>
   <view slot="footer" class="container" style="align-items: flex-end;">
     <van-button size="small" type="primary"
     bind:click="onReserve"
+    data-item="{{item}}"
     >预约</van-button>
   </view>
 </van-panel>
