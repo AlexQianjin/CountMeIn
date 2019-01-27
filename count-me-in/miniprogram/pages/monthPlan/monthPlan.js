@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     if (!wx.cloud) {
       wx.redirectTo({
-        url: '../chooseLib/chooseLib',
+        url: '../login/login',
       })
       return
     }

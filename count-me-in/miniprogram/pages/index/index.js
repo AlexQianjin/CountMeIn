@@ -16,7 +16,7 @@ Page({
 		console.log(localMemberInfoKey);
 		if (!wx.cloud) {
 			wx.redirectTo({
-				url: '../chooseLib/chooseLib'
+				url: '../login/login'
 			});
 			return;
 		}
