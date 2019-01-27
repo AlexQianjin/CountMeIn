@@ -6,7 +6,7 @@ Page({
 	data: {
 		userInfo: {},
 		logged: false,
-		requestResult: '',
+    requestResult: '',
 		courses: []
 	},
 
@@ -33,7 +33,7 @@ Page({
 			}
 		});
 		return;
-	},
+  },
 
 	onCancelReserve: function(e) {
 		this.removeReserveRecord(e.currentTarget.dataset.item);
@@ -70,13 +70,7 @@ Page({
 				let data = res.data;
 				console.log(data);
 				if (data && data.cellphone) {
-          if (data.role === 'trainer') {
-            wx.navigateTo({
-              url: '../confirmRecords/confirmRecords'
-            });
-            return;
-          }
-					this.getReservedCourses(data.cellphone);
+					this.getReservedCourses(data);
 					console.log('to reserve');
 				} else {
 					wx.switchTab({
@@ -95,7 +89,7 @@ Page({
 		});
 	},
 
-	getReservedCourses: function(cellphone) {
+	getReservedCourses: function(data) {
 		const db = wx.cloud.database();
 		const _ = db.command;
 		let date = new Date();
@@ -109,7 +103,7 @@ Page({
 						month: date.getMonth() + 1
 					},
 					{
-						cellphone: cellphone
+						cellphone: data.cellphone
 					}
 				])
 			)
@@ -120,7 +114,8 @@ Page({
 						courses: res.data.map(i => {
               i.createTime = i.createTime.toLocaleDateString();
               return i;
-            })
+            }),
+            userInfo: data
 					});
 
 					console.log('[数据库] [查询记录] 成功: ', res.data);

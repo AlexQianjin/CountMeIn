@@ -1,5 +1,11 @@
+<van-cell
+  wx:if="{{userInfo && userInfo.role  === 'trainer' ? true : false}}"
+  title="查看会员预约记录"
+  is-link
+  url="/pages/confirmRecords/confirmRecords"
+/>
 <van-panel wx:for="{{courses}}" 
-wx:if="{{courses.length > 0 ? true : false}}"
+wx:if="{{courses && courses.length > 0 ? true : false}}"
 wx:key="{{index}}" 
 title="{{item.course.name}}" 
 desc="{{item.createTime}} {{item.course.time}} {{item.course.location}}" 
@@ -12,6 +18,6 @@ status="{{item.course.coach}}" use-footer-slot>
     >取消预约</van-button>
   </view>
 </van-panel>
-<view class="container" wx:if="{{courses.length === 0 ? true : false}}">
+<view class="container" wx:if="{{courses && courses.length === 0 ? true : false}}">
   您目前没有预约课程
 </view>

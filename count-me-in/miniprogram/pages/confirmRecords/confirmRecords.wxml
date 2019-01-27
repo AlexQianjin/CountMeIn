@@ -1,11 +1,11 @@
 <van-panel  wx:for="{{reserveRecordsofToday}}"
-wx:if="{{courses.length > 0 ? true : false}}"
+wx:if="{{reserveRecordsofToday && reserveRecordsofToday.length > 0 ? true : false}}"
 wx:key="{{index}}" 
 title="{{item.name}}" status="{{item.count}}">
 </van-panel>
 
 <van-panel wx:for="{{courses}}" 
-wx:if="{{courses.length > 0 ? true : false}}"
+wx:if="{{courses && courses.length > 0 ? true : false}}"
 wx:key="{{index}}" 
 title="{{item.course.name}}" 
 desc="{{item.course.time}} {{item.course.location}}" 
@@ -21,6 +21,6 @@ status="{{item.course.coach}}" use-footer-slot>
     >{{item.valid ? "取消预约" : "确认预约"}}</van-button>
   </view>
 </van-panel>
-<view class="container" wx:if="{{courses.length === 0 ? true : false}}">
-  您目前没有预约课程
+<view class="container" wx:if="{{courses && courses.length === 0 ? true : false}}">
+  目前没有会员预约您的课程
 </view>
