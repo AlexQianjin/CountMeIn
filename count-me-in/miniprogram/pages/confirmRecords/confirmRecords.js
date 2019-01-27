@@ -7,7 +7,8 @@ Page({
 		userInfo: {},
 		logged: false,
 		requestResult: '',
-		courses: []
+		courses: [],
+		reserveRecordsofToday: []
 	},
 
 	onLoad: function() {
@@ -35,30 +36,39 @@ Page({
 		return;
 	},
 
-	onCancelReserve: function(e) {
-		this.removeReserveRecord(e.currentTarget.dataset.item);
+	onControlReserve: function(e) {
+		this.controlReserveRecord(e.currentTarget.dataset.item);
 	},
 
-	removeReserveRecord: function(record) {
+	controlReserveRecord: function(record) {
 		const db = wx.cloud.database();
 		db.collection('reserveRecord')
 			.doc(record._id)
-			.remove({
+			.update({
+				data: {
+					valid: !record.valid
+				},
 				success: res => {
 					wx.showToast({
-						title: '取消预约成功'
+						title: record.valid ? '取消确认成功' : '确认预约成功'
 					});
 					this.setData({
-						courses: this.data.courses.filter(i => i._id !== record._id)
+						courses: this.data.courses.map(i => {
+							if (i._id === record._id) {
+								i.valid = !i.valid;
+							}
+
+							return i;
+						})
 					});
-					console.log('[数据库] [删除记录] 成功，');
+					console.log('[数据库] [更新记录] 成功，', record._id);
 				},
 				fail: err => {
 					wx.showToast({
 						icon: 'none',
-						title: '删除记录失败'
+						title: '新记录失败'
 					});
-					console.error('[数据库] [删除记录] 失败：', err);
+					console.error('[数据库] [新记录] 失败：', err);
 				}
 			});
 	},
@@ -70,14 +80,13 @@ Page({
 				let data = res.data;
 				console.log(data);
 				if (data && data.cellphone) {
-          if (data.role === 'trainer') {
-            wx.navigateTo({
-              url: '../confirmRecords/confirmRecords'
-            });
-            return;
-          }
-					this.getReservedCourses(data.cellphone);
-					console.log('to reserve');
+					if (data.role !== 'trainer') {
+						wx.switchTab({
+							url: '../records/records'
+						});
+						return;
+					}
+					this.getReservedCourses(data.alias);
 				} else {
 					wx.switchTab({
 						url: '../userConsole/userConsole'
@@ -95,7 +104,7 @@ Page({
 		});
 	},
 
-	getReservedCourses: function(cellphone) {
+	getReservedCourses: function(alias) {
 		const db = wx.cloud.database();
 		const _ = db.command;
 		let date = new Date();
@@ -109,18 +118,20 @@ Page({
 						month: date.getMonth() + 1
 					},
 					{
-						cellphone: cellphone
+						'course.coach': alias
 					}
 				])
 			)
 			.orderBy('createTime', 'desc')
 			.get({
 				success: res => {
+					let reserveRecords = this.caculateTodayReservedCount(res.data);
 					this.setData({
 						courses: res.data.map(i => {
-              i.createTime = i.createTime.toLocaleDateString();
-              return i;
-            })
+							i.createTime = i.createTime.toLocaleDateString();
+							return i;
+						}),
+						reserveRecordsofToday: reserveRecords
 					});
 
 					console.log('[数据库] [查询记录] 成功: ', res.data);
@@ -135,10 +146,29 @@ Page({
 			});
 	},
 
+	caculateTodayReservedCount: function(courses) {
+		let courseStatistic = [];
+		let reserveRecordofToday = courses.filter(
+			i => i.createTime.toLocaleDateString() === new Date().toLocaleDateString()
+		);
+
+		reserveRecordofToday.forEach(reserve => {
+			let records = courseStatistic.filter(c => c.name === reserve.course.name);
+			if (records.length === 0) {
+				courseStatistic.push({ name: reserve.course.name, count: 1 });
+			} else {
+				records[0].count += 1;
+			}
+		});
+		console.log(courseStatistic, 'courseStatistic');
+
+		return courseStatistic;
+	},
+
 	onShow: function() {
 		this.checkCellphone();
   },
-  
+
   /**
    * Page event handler function--Called when user drop down
    */

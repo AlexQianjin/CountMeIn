@@ -4,6 +4,7 @@
     "pages/monthPlan/monthPlan",
     "pages/login/login",
     "pages/records/records",
+    "pages/confirmRecords/confirmRecords",
     "pages/userConsole/userConsole"
   ],
   "window": {

@@ -1,0 +1,10 @@
+{
+    "alias": "Blabla",
+    "startDate": { "$date": "2018-01-27T10:00:00.000Z" },
+    "cellphone": "15655550000",
+    "name": "Blabla",
+    "month": { "$numberLong": "120" },
+    "miniGroup": 10,
+    "role": "trainee",
+    "gymName": "光谷全民健身中心"
+}
