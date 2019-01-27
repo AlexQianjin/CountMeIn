@@ -63,4 +63,9 @@
     title="剩余会员天数"
     value="{{ memberInfo.daysLeft }}"
   />
+  <van-cell
+    wx:if="{{ memberInfo.miniGroup > 0}}"
+    title="小团体课程数量"
+    value="{{ memberInfo.miniGroup }}"
+  />
 </van-cell-group>

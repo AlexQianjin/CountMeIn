@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/monthPlan/monthPlan",
     "pages/login/login",
+    "pages/records/records",
     "pages/chooseLib/chooseLib",
     "pages/userConsole/userConsole"
   ],
