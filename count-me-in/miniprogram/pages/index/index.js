@@ -91,6 +91,13 @@ Page({
 				let data = res.data;
 				console.log(data);
 				if (data && data.cellphone) {
+					if (data.miniGroup === 0 && ["APT", "蹦床"].findIndex(i => i === selectedCourse.name) !== -1) {
+						wx.showToast({
+							icon: 'none',
+							title: '需要购买小团体课程'
+						});
+						return;
+					}
 					let record = this.generateRecord(selectedCourse, data);
 					this.addReserveRecord(record);
 					console.log('to reserve');
