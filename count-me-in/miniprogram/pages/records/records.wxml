@@ -1,2 +1,16 @@
-<!--pages/records/records.wxml-->
-<text>pages/records/records.wxml</text>
+<van-panel wx:for="{{courses}}" 
+wx:if="{{courses.length > 0 ? true : false}}"
+wx:key="{{index}}" 
+title="{{item.course.name}}" 
+desc="{{item.course.time}} {{item.course.location}}" 
+status="{{item.course.coach}}" use-footer-slot>
+  <view slot="footer" class="container" style="align-items: flex-end;">
+    <van-button size="small" type="primary"
+    bind:click="onCancelReserve"
+    data-item="{{item}}"
+    >取消预约</van-button>
+  </view>
+</van-panel>
+<view class="container" wx:if="{{courses.length === 0 ? true : false}}">
+  您目前没有预约课程
+</view>

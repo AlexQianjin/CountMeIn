@@ -1,66 +1,132 @@
-// pages/records/records.js
+//index.js
+const app = getApp();
+const localMemberInfoKey = 'localMemberInfo';
+
 Page({
+	data: {
+		userInfo: {},
+		logged: false,
+		requestResult: '',
+		courses: []
+	},
 
-  /**
-   * Page initial data
-   */
-  data: {
+	onLoad: function() {
+		console.log(localMemberInfoKey);
+		if (!wx.cloud) {
+			wx.redirectTo({
+				url: '../chooseLib/chooseLib'
+			});
+			return;
+		}
 
-  },
+		// 获取用户信息
+		wx.getSetting({
+			success: res => {
+				if (res.authSetting['scope.userInfo']) {
+					// this.getTodayCourses();
+				} else {
+					console.log('need to get user info');
+					wx.redirectTo({
+						url: '../login/login'
+					});
+				}
+			}
+		});
+		return;
+	},
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+	onCancelReserve: function(e) {
+		this.removeReserveRecord(e.currentTarget.dataset.item);
+	},
 
-  },
+	removeReserveRecord: function(record) {
+		const db = wx.cloud.database();
+		db.collection('reserveRecord')
+			.doc(record._id)
+			.remove({
+				success: res => {
+					wx.showToast({
+						title: '取消预约成功'
+					});
+					this.setData({
+						courses: this.data.courses.filter(i => i._id !== record._id)
+					});
+					console.log('[数据库] [删除记录] 成功，');
+				},
+				fail: err => {
+					wx.showToast({
+						icon: 'none',
+						title: '删除记录失败'
+					});
+					console.error('[数据库] [删除记录] 失败：', err);
+				}
+			});
+	},
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
+	checkCellphone: function() {
+		wx.getStorage({
+			key: localMemberInfoKey,
+			success: res => {
+				let data = res.data;
+				console.log(data);
+				if (data && data.cellphone) {
+					this.getReservedCourses(data.cellphone);
+					console.log('to reserve');
+				} else {
+					wx.switchTab({
+						url: '../userConsole/userConsole'
+					});
+					return;
+				}
+			},
+			fail: res => {
+				console.log('cellphone failed');
+				wx.switchTab({
+					url: '../userConsole/userConsole'
+				});
+				return;
+			}
+		});
+	},
 
-  },
+	getReservedCourses: function(cellphone) {
+		const db = wx.cloud.database();
+		const _ = db.command;
+		let date = new Date();
+		db.collection('reserveRecord')
+			.where(
+				_.and([
+					{
+						year: date.getFullYear()
+					},
+					{
+						month: date.getMonth() + 1
+					},
+					{
+						cellphone: cellphone
+					}
+				])
+			)
+			.orderBy('createTime', 'desc')
+			.get({
+				success: res => {
+					this.setData({
+						courses: res.data
+					});
 
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
+					console.log('[数据库] [查询记录] 成功: ', res.data);
+				},
+				fail: err => {
+					wx.showToast({
+						icon: 'none',
+						title: '查询记录失败'
+					});
+					console.error('[数据库] [查询记录] 失败：', err);
+				}
+			});
+	},
 
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+	onShow: function() {
+		this.checkCellphone();
+	}
+});

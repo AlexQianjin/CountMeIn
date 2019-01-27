@@ -61,6 +61,7 @@ Page({
 
 	addReserveRecord: function(record) {
 		const db = wx.cloud.database();
+		record.createTime = db.serverDate();
 		db.collection('reserveRecord').add({
 			data: record,
 			success: res => {

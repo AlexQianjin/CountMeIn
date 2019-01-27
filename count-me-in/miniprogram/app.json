@@ -21,7 +21,11 @@
         "text": "本月课程",
         "pagePath": "pages/monthPlan/monthPlan"
       },
-      { "text": "我的", "pagePath": "pages/userConsole/userConsole" }
+      {
+        "text": "我的预约",
+        "pagePath": "pages/records/records"
+      },
+      { "text": "我", "pagePath": "pages/userConsole/userConsole" }
     ]
   }
 }
