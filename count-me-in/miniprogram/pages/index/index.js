@@ -99,9 +99,7 @@ Page({
 						});
 						return;
 					}
-					let record = this.generateRecord(selectedCourse, data);
-					this.addReserveRecord(record);
-					console.log('to reserve');
+					this.checkHasReserved(selectedCourse, data);
 				} else {
 					wx.switchTab({
 						url: '../userConsole/userConsole'
@@ -117,6 +115,54 @@ Page({
 				return;
 			}
 		});
+	},
+
+	checkHasReserved(selectedCourse, localData) {
+		const db = wx.cloud.database();
+		const _ = db.command;
+		db.collection('reserveRecord')
+			.where(
+				_.and([
+					{
+						year: this.data.courses[0].year
+					},
+					{
+						month: this.data.courses[0].month
+					},
+					{
+						dayIndex: this.data.courses[0].dayIndex
+					},
+					{
+						cellphone: localData.cellphone
+					},
+					{
+						'course.cousreIndex': selectedCourse.cousreIndex
+					}
+				])
+			)
+			.get({
+				success: res => {
+					if (res.data.length > 0) {
+						wx.showToast({
+							icon: 'none',
+							title: '已预约'
+						});
+
+						return;
+					}
+					
+					let record = this.generateRecord(selectedCourse, localData);
+					this.addReserveRecord(record);
+					console.log('to reserve');
+				},
+				fail: err => {
+					wx.showToast({
+						icon: 'none',
+						title: '查询记录失败'
+					});
+					console.error('[数据库] [查询记录] 失败：', err);
+				}
+			});
 	},
 
 	getTodayCourses: function() {
