@@ -9,7 +9,8 @@ const db = cloud.database();
 exports.main = async (event, context) => {
 	try {
 		return await db.collection('courses').where({
-      year: 2019
+			year: 2019,
+			month: 2
     }).remove();
 	} catch (e) {
 		console.error(e);
