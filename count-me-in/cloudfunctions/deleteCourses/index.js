@@ -8,9 +8,10 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async (event, context) => {
 	try {
+		const {userInfo, year, month} = event
 		return await db.collection('courses').where({
-			year: 2019,
-			month: 2
+			year: year,
+			month: month
     }).remove();
 	} catch (e) {
 		console.error(e);
