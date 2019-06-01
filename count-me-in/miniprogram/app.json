@@ -16,7 +16,10 @@
   },
   "tabBar": {
     "list": [
-      { "text": "今日课程", "pagePath": "pages/index/index" },
+      {
+        "text": "今日课程",
+        "pagePath": "pages/index/index"
+      },
       {
         "text": "本月课程",
         "pagePath": "pages/monthPlan/monthPlan"
@@ -25,7 +28,11 @@
         "text": "我的预约",
         "pagePath": "pages/records/records"
       },
-      { "text": "我", "pagePath": "pages/userConsole/userConsole" }
+      {
+        "text": "我",
+        "pagePath": "pages/userConsole/userConsole"
+      }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
