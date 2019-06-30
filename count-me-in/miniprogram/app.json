@@ -1,11 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/monthPlan/monthPlan",
-    "pages/login/login",
-    "pages/records/records",
-    "pages/confirmRecords/confirmRecords",
-    "pages/userConsole/userConsole"
+    "pages/monthPlan/monthPlan"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -23,14 +19,6 @@
       {
         "text": "本月课程",
         "pagePath": "pages/monthPlan/monthPlan"
-      },
-      {
-        "text": "我的预约",
-        "pagePath": "pages/records/records"
-      },
-      {
-        "text": "我",
-        "pagePath": "pages/userConsole/userConsole"
       }
     ]
   },
