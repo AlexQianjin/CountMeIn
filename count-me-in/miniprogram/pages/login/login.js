@@ -25,7 +25,7 @@ Page({
       //   userInfo: e.detail.userInfo
       // });
       wx.switchTab({
-        url: '../userConsole/userConsole',
+        url: '../index/index',
         success: function (res) {
           // success
           console.log("跳转成功");
