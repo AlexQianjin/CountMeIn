@@ -4,7 +4,7 @@
   class="login-button"
   bindgetuserinfo="onGetUserInfo"
   open-type="getUserInfo"
->微信登陆</button>
+>微信登录</button>
 </view>
 <!-- <van-row custom-class="row">
   <van-col span="24">
