@@ -12,7 +12,7 @@
         size="large"
         bind:getuserinfo="onGetUserInfo"
         open-type="getUserInfo"
-      >微信登陆</van-button>
+      >微信登录</van-button>
 
   </van-col>
 </van-row> -->
