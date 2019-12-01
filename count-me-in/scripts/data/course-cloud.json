@@ -1,6 +1,6 @@
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 0,
 	"dayofweek": "周一",
 	"courses": [
@@ -29,7 +29,7 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 1,
 	"dayofweek": "周二",
 	"courses": [
@@ -58,7 +58,7 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 2,
 	"dayofweek": "周三",
 	"courses": [
@@ -87,7 +87,7 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 3,
 	"dayofweek": "周四",
 	"courses": [
@@ -116,21 +116,21 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 4,
 	"dayofweek": "周五",
 	"courses": [
 		{
 			"cousreIndex": 0,
 			"time": "18:45 - 19:30",
-			"name": "身心平衡",
+			"name": "激情有氧",
 			"coach": "Tracy",
 			"location": "团体课教室"
 		},
 		{
 			"cousreIndex": 1,
 			"time": "19:45 - 20:30",
-			"name": "激情有氧",
+			"name": "身心平衡",
 			"coach": "Tracy",
 			"location": "团体课教室"
 		},
@@ -145,22 +145,22 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 5,
 	"dayofweek": "周六",
 	"courses": [
 		{
 			"cousreIndex": 0,
 			"time": "18:45 - 19:30",
-			"name": "肩颈理疗",
-			"coach": "Candy",
+			"name": "爵士",
+			"coach": "Hug",
 			"location": "团体课教室"
 		},
 		{
 			"cousreIndex": 1,
 			"time": "19:45 - 20:30",
 			"name": "普拉提",
-			"coach": "Candy",
+			"coach": "Hug",
 			"location": "团体课教室"
 		},
 		{
@@ -174,14 +174,14 @@
 }
 {
 	"year": 2019,
-	"month": 11,
+	"month": 12,
 	"dayIndex": 6,
 	"dayofweek": "周日",
 	"courses": [
 		{
 			"cousreIndex": 0,
 			"time": "18:45 - 19:30",
-			"name": "舞韵瑜伽",
+			"name": "纤体瑜伽",
 			"coach": "Alin",
 			"location": "团体课教室"
 		},
