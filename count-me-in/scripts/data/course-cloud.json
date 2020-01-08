@@ -1,6 +1,6 @@
 {
-	"year": 2019,
-	"month": 12,
+	"year": 2020,
+	"month": 1,
 	"dayIndex": 0,
 	"dayofweek": "周一",
 	"courses": [
@@ -28,97 +28,10 @@
 	]
 }
 {
-	"year": 2019,
-	"month": 12,
+	"year": 2020,
+	"month": 1,
 	"dayIndex": 1,
 	"dayofweek": "周二",
-	"courses": [
-		{
-			"cousreIndex": 0,
-			"time": "18:45 - 19:30",
-			"name": "爵士",
-			"coach": "Hug",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 1,
-			"time": "19:45 - 20:30",
-			"name": "哈他瑜伽",
-			"coach": "Hug",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 2,
-			"time": "预约制",
-			"name": "APT",
-			"coach": "Mike",
-			"location": "玻璃房"
-		}
-	]
-}
-{
-	"year": 2019,
-	"month": 12,
-	"dayIndex": 2,
-	"dayofweek": "周三",
-	"courses": [
-		{
-			"cousreIndex": 0,
-			"time": "18:45 - 19:30",
-			"name": "激情有氧",
-			"coach": "Tracy",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 1,
-			"time": "19:45 - 20:30",
-			"name": "CX核心",
-			"coach": "Tracy",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 2,
-			"time": "预约制",
-			"name": "APT",
-			"coach": "Mike",
-			"location": "玻璃房"
-		}
-	]
-}
-{
-	"year": 2019,
-	"month": 12,
-	"dayIndex": 3,
-	"dayofweek": "周四",
-	"courses": [
-		{
-			"cousreIndex": 0,
-			"time": "18:45 - 19:30",
-			"name": "杠铃操",
-			"coach": "Tracy",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 1,
-			"time": "19:45 - 20:30",
-			"name": "搏击操",
-			"coach": "Mike",
-			"location": "团体课教室"
-		},
-		{
-			"cousreIndex": 2,
-			"time": "预约制",
-			"name": "APT",
-			"coach": "Mike",
-			"location": "玻璃房"
-		}
-	]
-}
-{
-	"year": 2019,
-	"month": 12,
-	"dayIndex": 4,
-	"dayofweek": "周五",
 	"courses": [
 		{
 			"cousreIndex": 0,
@@ -144,23 +57,23 @@
 	]
 }
 {
-	"year": 2019,
-	"month": 12,
-	"dayIndex": 5,
-	"dayofweek": "周六",
+	"year": 2020,
+	"month": 1,
+	"dayIndex": 2,
+	"dayofweek": "周三",
 	"courses": [
 		{
 			"cousreIndex": 0,
 			"time": "18:45 - 19:30",
-			"name": "爵士",
-			"coach": "Hug",
+			"name": "杠铃操",
+			"coach": "Tracy",
 			"location": "团体课教室"
 		},
 		{
 			"cousreIndex": 1,
 			"time": "19:45 - 20:30",
-			"name": "普拉提",
-			"coach": "Hug",
+			"name": "搏击操",
+			"coach": "Mike",
 			"location": "团体课教室"
 		},
 		{
@@ -173,23 +86,110 @@
 	]
 }
 {
-	"year": 2019,
-	"month": 12,
+	"year": 2020,
+	"month": 1,
+	"dayIndex": 3,
+	"dayofweek": "周四",
+	"courses": [
+		{
+			"cousreIndex": 0,
+			"time": "18:45 - 19:30",
+			"name": "激情有氧",
+			"coach": "Tracy",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 1,
+			"time": "19:45 - 20:30",
+			"name": "CX核心",
+			"coach": "Tracy",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 2,
+			"time": "预约制",
+			"name": "APT",
+			"coach": "Mike",
+			"location": "玻璃房"
+		}
+	]
+}
+{
+	"year": 2020,
+	"month": 1,
+	"dayIndex": 4,
+	"dayofweek": "周五",
+	"courses": [
+		{
+			"cousreIndex": 0,
+			"time": "18:45 - 19:30",
+			"name": "杠铃操",
+			"coach": "Tracy",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 1,
+			"time": "19:45 - 20:30",
+			"name": "搏击操",
+			"coach": "Mike",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 2,
+			"time": "预约制",
+			"name": "APT",
+			"coach": "Mike",
+			"location": "玻璃房"
+		}
+	]
+}
+{
+	"year": 2020,
+	"month": 1,
+	"dayIndex": 5,
+	"dayofweek": "周六",
+	"courses": [
+		{
+			"cousreIndex": 0,
+			"time": "18:45 - 19:30",
+			"name": "实战搏击",
+			"coach": "Mike",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 1,
+			"time": "19:45 - 20:30",
+			"name": "身心平衡",
+			"coach": "Tracy",
+			"location": "团体课教室"
+		},
+		{
+			"cousreIndex": 2,
+			"time": "预约制",
+			"name": "APT",
+			"coach": "Mike",
+			"location": "玻璃房"
+		}
+	]
+}
+{
+	"year": 2020,
+	"month": 1,
 	"dayIndex": 6,
 	"dayofweek": "周日",
 	"courses": [
 		{
 			"cousreIndex": 0,
 			"time": "18:45 - 19:30",
-			"name": "纤体瑜伽",
-			"coach": "Alin",
+			"name": "激情有氧",
+			"coach": "Tracy",
 			"location": "团体课教室"
 		},
 		{
 			"cousreIndex": 1,
 			"time": "19:45 - 20:30",
-			"name": "臀腿专题",
-			"coach": "Alin",
+			"name": "CX核心",
+			"coach": "Tracy",
 			"location": "团体课教室"
 		},
 		{
