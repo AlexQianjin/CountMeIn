@@ -1,94 +1,99 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"enhance": false,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": false,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"appid": "wx43a52ee9fb7b4b9b",
-	"projectname": "count-me-in",
-	"libVersion": "2.5.0",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"miniprogram": {
-			"current": 5,
-			"list": [
-				{
-					"id": 0,
-					"name": "index",
-					"pathName": "pages/index/index",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "monthPlan",
-					"pathName": "pages/monthPlan/monthPlan",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "userConsole",
-					"pathName": "pages/userConsole/userConsole",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "login",
-					"pathName": "pages/login/login",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "records",
-					"pathName": "pages/records/records",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "confirmRecords",
-					"pathName": "pages/confirmRecords/confirmRecords",
-					"query": ""
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "appid": "wx43a52ee9fb7b4b9b",
+  "projectname": "count-me-in",
+  "libVersion": "2.5.0",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "index",
+          "pathName": "pages/index/index",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "monthPlan",
+          "pathName": "pages/monthPlan/monthPlan",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "userConsole",
+          "pathName": "pages/userConsole/userConsole",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "login",
+          "pathName": "pages/login/login",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "records",
+          "pathName": "pages/records/records",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "confirmRecords",
+          "pathName": "pages/confirmRecords/confirmRecords",
+          "query": ""
+        }
+      ]
+    }
+  }
 }
