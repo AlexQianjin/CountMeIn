@@ -37,7 +37,8 @@
     "minifyWXML": true,
     "showES6CompileOption": false,
     "useCompilerPlugins": false,
-    "ignoreUploadUnusedFiles": true
+    "ignoreUploadUnusedFiles": true,
+    "useStaticServer": true
   },
   "appid": "wx43a52ee9fb7b4b9b",
   "projectname": "count-me-in",
@@ -45,57 +46,50 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
     "miniprogram": {
       "list": [
         {
-          "id": 0,
           "name": "index",
           "pathName": "pages/index/index",
           "query": ""
         },
         {
-          "id": -1,
           "name": "monthPlan",
           "pathName": "pages/monthPlan/monthPlan",
           "query": ""
         },
         {
-          "id": -1,
           "name": "userConsole",
           "pathName": "pages/userConsole/userConsole",
           "query": ""
         },
         {
-          "id": -1,
           "name": "login",
           "pathName": "pages/login/login",
           "query": ""
         },
         {
-          "id": -1,
           "name": "records",
           "pathName": "pages/records/records",
           "query": ""
         },
         {
-          "id": -1,
           "name": "confirmRecords",
           "pathName": "pages/confirmRecords/confirmRecords",
           "query": ""
         }
       ]
     }
-  }
+  },
+  "compileType": "miniprogram",
+  "srcMiniprogramRoot": "miniprogram/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
 }
