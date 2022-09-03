@@ -1,105 +1,60 @@
 import { VantComponent } from '../common/component';
+import { useParent } from '../common/relation';
+import { setContentAnimate } from './animate';
 VantComponent({
-  classes: ['content-class'],
-  relation: {
-    name: 'collapse',
-    type: 'ancestor',
-    linked: function linked(parent) {
-      this.parent = parent;
-    }
-  },
-  props: {
-    name: null,
-    title: null,
-    value: null,
-    icon: String,
-    label: String,
-    disabled: Boolean,
-    border: {
-      type: Boolean,
-      value: true
+    classes: ['title-class', 'content-class'],
+    relation: useParent('collapse'),
+    props: {
+        size: String,
+        name: null,
+        title: null,
+        value: null,
+        icon: String,
+        label: String,
+        disabled: Boolean,
+        clickable: Boolean,
+        border: {
+            type: Boolean,
+            value: true,
+        },
+        isLink: {
+            type: Boolean,
+            value: true,
+        },
     },
-    isLink: {
-      type: Boolean,
-      value: true
-    }
-  },
-  data: {
-    contentHeight: 0,
-    expanded: false
-  },
-  beforeCreate: function beforeCreate() {
-    this.animation = wx.createAnimation({
-      duration: 300,
-      timingFunction: 'ease-in-out'
-    });
-  },
-  methods: {
-    updateExpanded: function updateExpanded() {
-      if (!this.parent) {
-        return null;
-      }
-
-      var _this$parent$data = this.parent.data,
-          value = _this$parent$data.value,
-          accordion = _this$parent$data.accordion,
-          items = _this$parent$data.items;
-      var name = this.data.name;
-      var index = items.indexOf(this);
-      var currentName = name == null ? index : name;
-      var expanded = accordion ? value === currentName : value.some(function (name) {
-        return name === currentName;
-      });
-
-      if (expanded !== this.data.expanded) {
-        this.updateStyle(expanded);
-      }
-
-      this.set({
-        expanded: expanded
-      });
+    data: {
+        expanded: false,
     },
-    updateStyle: function updateStyle(expanded) {
-      var _this = this;
-
-      this.getRect('.van-collapse-item__content').then(function (res) {
-        var animationData = _this.animation.height(expanded ? res.height : 0).step().export();
-
-        if (expanded) {
-          _this.set({
-            animationData: animationData
-          });
-        } else {
-          _this.set({
-            contentHeight: res.height + 'px'
-          }, function () {
-            setTimeout(function () {
-              _this.set({
-                animationData: animationData
-              });
-            }, 20);
-          });
-        }
-      });
+    mounted() {
+        this.updateExpanded();
+        this.mounted = true;
     },
-    onClick: function onClick() {
-      if (this.data.disabled) {
-        return;
-      }
-
-      var _this$data = this.data,
-          name = _this$data.name,
-          expanded = _this$data.expanded;
-      var index = this.parent.data.items.indexOf(this);
-      var currentName = name == null ? index : name;
-      this.parent.switch(currentName, !expanded);
+    methods: {
+        updateExpanded() {
+            if (!this.parent) {
+                return;
+            }
+            const { value, accordion } = this.parent.data;
+            const { children = [] } = this.parent;
+            const { name } = this.data;
+            const index = children.indexOf(this);
+            const currentName = name == null ? index : name;
+            const expanded = accordion
+                ? value === currentName
+                : (value || []).some((name) => name === currentName);
+            if (expanded !== this.data.expanded) {
+                setContentAnimate(this, expanded, this.mounted);
+            }
+            this.setData({ index, expanded });
+        },
+        onClick() {
+            if (this.data.disabled) {
+                return;
+            }
+            const { name, expanded } = this.data;
+            const index = this.parent.children.indexOf(this);
+            const currentName = name == null ? index : name;
+            this.parent.switch(currentName, !expanded);
+        },
     },
-    onTransitionEnd: function onTransitionEnd() {
-      if (this.data.expanded) {
-        this.set({
-          contentHeight: 'auto'
-        });
-      }
-    }
-  }
 });

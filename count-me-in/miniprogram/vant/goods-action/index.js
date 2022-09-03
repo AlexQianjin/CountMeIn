@@ -1,5 +1,15 @@
 import { VantComponent } from '../common/component';
-import { iphonex } from '../mixins/iphonex';
+import { useChildren } from '../common/relation';
 VantComponent({
-  mixins: [iphonex]
+    relation: useChildren('goods-action-button', function () {
+        this.children.forEach((item) => {
+            item.updateStyle();
+        });
+    }),
+    props: {
+        safeAreaInsetBottom: {
+            type: Boolean,
+            value: true,
+        },
+    },
 });

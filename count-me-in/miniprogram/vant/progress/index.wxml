@@ -1,14 +1,20 @@
-<view class="van-progress custom-class">
+<wxs src="../wxs/utils.wxs" module="utils" />
+<wxs src="./index.wxs" module="computed" />
+
+<view
+  class="van-progress custom-class"
+  style="{{ computed.rootStyle({ strokeWidth, trackColor }) }}"
+>
   <view
-    class="van-progress__portion {{ showPivot && text ? 'van-progress__portion--with-pivot' : '' }}"
-    style="{{ portionStyle }}"
+    class="van-progress__portion"
+    style="{{ computed.portionStyle({ percentage, inactive, color }) }}"
   >
     <view
-      wx:if="{{ showPivot && text }}"
-      style="{{ pivotStyle }}"
+      wx:if="{{ showPivot && computed.pivotText(pivotText, percentage) }}"
+      style="{{ computed.pivotStyle({ textColor, pivotColor, inactive, color, right }) }}"
       class="van-progress__pivot"
     >
-      {{ text }}
+      {{ computed.pivotText(pivotText, percentage) }}
     </view>
   </view>
 </view>

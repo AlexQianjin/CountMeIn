@@ -4,7 +4,7 @@
 </view>
 <van-panel wx:for="{{courses[0].courses}}" 
 wx:if="{{courses.length > 0 ? true : false}}"
-wx:key="{{index}}" 
+wx:key="index" 
 title="{{item.name}}" 
 desc="{{item.time}} {{item.location}}" 
 status="{{item.coach}}" use-footer-slot>

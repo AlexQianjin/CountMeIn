@@ -42,7 +42,7 @@
   },
   "appid": "wx43a52ee9fb7b4b9b",
   "projectname": "count-me-in",
-  "libVersion": "2.5.0",
+  "libVersion": "2.25.4",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {

@@ -1,34 +1,46 @@
-import { isObj } from '../common/utils';
-var defaultOptions = {
-  selector: '#van-notify',
-  duration: 3000
+import { WHITE } from '../common/color';
+const defaultOptions = {
+    selector: '#van-notify',
+    type: 'danger',
+    message: '',
+    background: '',
+    duration: 3000,
+    zIndex: 110,
+    top: 0,
+    color: WHITE,
+    safeAreaInsetTop: false,
+    onClick: () => { },
+    onOpened: () => { },
+    onClose: () => { },
 };
-
-function parseOptions(text) {
-  return isObj(text) ? text : {
-    text: text
-  };
+function parseOptions(message) {
+    if (message == null) {
+        return {};
+    }
+    return typeof message === 'string' ? { message } : message;
 }
-
 function getContext() {
-  var pages = getCurrentPages();
-  return pages[pages.length - 1];
+    const pages = getCurrentPages();
+    return pages[pages.length - 1];
 }
-
 export default function Notify(options) {
-  if (options === void 0) {
-    options = {};
-  }
-
-  options = Object.assign({}, defaultOptions, parseOptions(options));
-  var context = options.context || getContext();
-  var notify = context.selectComponent(options.selector);
-  delete options.selector;
-
-  if (notify) {
-    notify.set(options);
-    notify.show();
-  } else {
+    options = Object.assign(Object.assign({}, defaultOptions), parseOptions(options));
+    const context = options.context || getContext();
+    const notify = context.selectComponent(options.selector);
+    delete options.context;
+    delete options.selector;
+    if (notify) {
+        notify.setData(options);
+        notify.show();
+        return notify;
+    }
     console.warn('未找到 van-notify 节点，请确认 selector 及 context 是否正确');
-  }
 }
+Notify.clear = function (options) {
+    options = Object.assign(Object.assign({}, defaultOptions), parseOptions(options));
+    const context = options.context || getContext();
+    const notify = context.selectComponent(options.selector);
+    if (notify) {
+        notify.hide();
+    }
+};

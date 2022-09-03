@@ -1,32 +1,66 @@
+import { canIUseModel } from '../common/version';
 import { VantComponent } from '../common/component';
+import { useParent } from '../common/relation';
 VantComponent({
-  field: true,
-  relation: {
-    name: 'radio-group',
-    type: 'ancestor'
-  },
-  classes: ['icon-class', 'label-class'],
-  props: {
-    name: null,
-    value: null,
-    disabled: Boolean,
-    labelDisabled: Boolean,
-    labelPosition: String,
-    checkedColor: String
-  },
-  methods: {
-    emitChange: function emitChange(value) {
-      var instance = this.getRelationNodes('../radio-group/index')[0] || this;
-      instance.$emit('input', value);
-      instance.$emit('change', value);
+    field: true,
+    relation: useParent('radio-group', function () {
+        this.updateFromParent();
+    }),
+    classes: ['icon-class', 'label-class'],
+    props: {
+        name: null,
+        value: null,
+        disabled: Boolean,
+        useIconSlot: Boolean,
+        checkedColor: String,
+        labelPosition: {
+            type: String,
+            value: 'right',
+        },
+        labelDisabled: Boolean,
+        shape: {
+            type: String,
+            value: 'round',
+        },
+        iconSize: {
+            type: null,
+            value: 20,
+        },
     },
-    onChange: function onChange(event) {
-      this.emitChange(event.detail.value);
+    data: {
+        direction: '',
+        parentDisabled: false,
     },
-    onClickLabel: function onClickLabel() {
-      if (!this.data.disabled && !this.data.labelDisabled) {
-        this.emitChange(this.data.name);
-      }
-    }
-  }
+    methods: {
+        updateFromParent() {
+            if (!this.parent) {
+                return;
+            }
+            const { value, disabled: parentDisabled, direction } = this.parent.data;
+            this.setData({
+                value,
+                direction,
+                parentDisabled,
+            });
+        },
+        emitChange(value) {
+            const instance = this.parent || this;
+            instance.$emit('input', value);
+            instance.$emit('change', value);
+            if (canIUseModel()) {
+                instance.setData({ value });
+            }
+        },
+        onChange() {
+            if (!this.data.disabled && !this.data.parentDisabled) {
+                this.emitChange(this.data.name);
+            }
+        },
+        onClickLabel() {
+            const { disabled, parentDisabled, labelDisabled, name } = this.data;
+            if (!(disabled || parentDisabled) && !labelDisabled) {
+                this.emitChange(name);
+            }
+        },
+    },
 });

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "van-icon": "../icon/index",
-    "van-cell": "../cell/index"
+    "van-sidebar": "../sidebar/index",
+    "van-sidebar-item": "../sidebar-item/index"
   }
 }

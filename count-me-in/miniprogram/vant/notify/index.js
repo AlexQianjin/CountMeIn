@@ -1,42 +1,65 @@
 import { VantComponent } from '../common/component';
-import { RED } from '../common/color';
+import { WHITE } from '../common/color';
+import { getSystemInfoSync } from '../common/utils';
 VantComponent({
-  props: {
-    text: String,
-    color: {
-      type: String,
-      value: '#fff'
+    props: {
+        message: String,
+        background: String,
+        type: {
+            type: String,
+            value: 'danger',
+        },
+        color: {
+            type: String,
+            value: WHITE,
+        },
+        duration: {
+            type: Number,
+            value: 3000,
+        },
+        zIndex: {
+            type: Number,
+            value: 110,
+        },
+        safeAreaInsetTop: {
+            type: Boolean,
+            value: false,
+        },
+        top: null,
     },
-    backgroundColor: {
-      type: String,
-      value: RED
+    data: {
+        show: false,
+        onOpened: null,
+        onClose: null,
+        onClick: null,
     },
-    duration: {
-      type: Number,
-      value: 3000
-    }
-  },
-  methods: {
-    show: function show() {
-      var _this = this;
-
-      var duration = this.data.duration;
-      clearTimeout(this.timer);
-      this.set({
-        show: true
-      });
-
-      if (duration > 0 && duration !== Infinity) {
-        this.timer = setTimeout(function () {
-          _this.hide();
-        }, duration);
-      }
+    created() {
+        const { statusBarHeight } = getSystemInfoSync();
+        this.setData({ statusBarHeight });
     },
-    hide: function hide() {
-      clearTimeout(this.timer);
-      this.set({
-        show: false
-      });
-    }
-  }
+    methods: {
+        show() {
+            const { duration, onOpened } = this.data;
+            clearTimeout(this.timer);
+            this.setData({ show: true });
+            wx.nextTick(onOpened);
+            if (duration > 0 && duration !== Infinity) {
+                this.timer = setTimeout(() => {
+                    this.hide();
+                }, duration);
+            }
+        },
+        hide() {
+            const { onClose } = this.data;
+            clearTimeout(this.timer);
+            this.setData({ show: false });
+            wx.nextTick(onClose);
+        },
+        onTap(event) {
+            const { onClick } = this.data;
+            if (onClick) {
+                onClick(event.detail);
+            }
+        },
+    },
 });
